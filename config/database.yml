@@ -50,12 +50,25 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  adapter: mysql2
-  database: <%= ENV['MYSQLDATABASE'] %>
-  username: <%= ENV['MYSQLUSER'] %>
-  password: <%= ENV['MYSQLPASSWORD'] %>
-  host: <%= ENV['MYSQLHOST'] %>
-  port: <%= ENV['MYSQLPORT'] %>
-  encoding: utf8mb4
-  pool: 5
-  url: <%= ENV['MYSQL_URL'] %>
+  primary: &primary_production
+    <<: *default
+    database: <%= ENV['MYSQLDATABASE'] %>
+    username: <%= ENV['MYSQLUSER'] %>
+    password: <%= ENV['MYSQLPASSWORD'] %>
+    host: <%= ENV['MYSQLHOST'] %>
+    port: <%= ENV['MYSQLPORT'] %>
+    encoding: utf8mb4
+    pool: 5
+    url: <%= ENV['MYSQL_URL'] %>
+  cache:
+    <<: *primary_production
+    database: cash_register_production_cache
+    migrations_paths: db/cache_migrate
+  queue:
+    <<: *primary_production
+    database: cash_register_production_queue
+    migrations_paths: db/queue_migrate
+  cable:
+    <<: *primary_production
+    database: cash_register_production_cable
+    migrations_paths: db/cable_migrate
