@@ -27,7 +27,7 @@
       <li class="flex items-center justify-between border-b border-gray-100 pb-2 last:border-b-0 last:pb-0">
         <div class="flex-grow flex items-baseline justify-between pr-4">
             <span class="text-lg text-gray-800"><%= item.product.name %></span>
-            <span class="text-xl font-bold text-gray-700"><%= number_to_currency(item.product.price, unit: "€") %></span>
+            <span class="text-xl font-bold text-gray-700"><%= number_to_currency(item.promotional_price, unit: "€") %></span>
         </div>
         <div class="w-24 flex-shrink-0 text-right">
           <%= button_to "Remove", basket_basket_item_path(item),

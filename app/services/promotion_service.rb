@@ -17,8 +17,15 @@ class PromotionService
     return 0 if item_count == 0
     product = items.first.product
 
-    count = ((item_count / 2) + (item_count % 2))
-    (count.to_d * product.price.to_d).round(2)
+    items.each_with_index do |item, index|
+      if index.odd? # take 1
+        item.update_attribute(:promotional_price, "0.00".to_d)
+      else
+        item.update_attribute(:promotional_price, product.price)
+      end
+    end
+    
+    items.map(&:promotional_price).sum
   end
 
   def fixed_discount_promo_price
@@ -26,15 +33,14 @@ class PromotionService
     item_count = items.count
     return 0 if item_count == 0
     product = items.first.product
-    product_discounted_price = 4.50.to_d
 
-    total = if item_count >= 3
-      item_count.to_d * product_discounted_price
+    if item_count >= 3
+      items.update_all(promotional_price: 4.50.to_d)
     else
-      item_count.to_d * product.price
+      items.update_all(promotional_price: product.price)
     end
 
-    total.round(2)
+    items.map(&:promotional_price).sum
   end
 
   def percent_discount_promo_price
@@ -43,12 +49,13 @@ class PromotionService
     return 0 if item_count == 0
     product = items.first.product
 
-    total = if item_count >= 3
-      (item_count * product.price * (2.to_d / 3.to_d)).round(2)
+    if item_count >= 3
+      promotional_price = (product.price * (2.to_d / 3.to_d)).round(4)
+      items.update_all(promotional_price: promotional_price)
     else
-      (item_count * product.price).round(2)
+      items.update_all(promotional_price: product.price)
     end
 
-    total.round(2)
+    items.map(&:promotional_price).sum.round(2)
   end
 end
