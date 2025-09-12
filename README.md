@@ -1,24 +1,8 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a prototype of a cash registry that is tasked to be able to:
+- Add a product to a basket
+- Display the total amount of the basket
+- Apply promotional discount based on different rules
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Built on Ruby 3.2.2 and Rails 8
