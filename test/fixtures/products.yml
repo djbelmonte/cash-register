@@ -1,0 +1,16 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+tea:
+  name: Green Tea
+  product_code: GR1
+  price: 3.11
+
+strawberry:
+  name: Strawberries
+  product_code: SR1
+  price: 5.00
+
+coffee:
+  name: Coffee
+  product_code: CF1
+  price: 11.23

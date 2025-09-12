@@ -7,3 +7,16 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+products = [
+  { product_code: "GR1", name: "Green Tea", price: 3.11 },
+  { product_code: "SR1", name: "Strawberries", price: 5.00 },
+  { product_code: "CF1", name: "Coffee", price: 11.23 },
+]
+
+products.each do |p|
+  Product.find_or_create_by!(product_code: p[:product_code]) do |product|
+    product.price = p[:price]
+    product.name = p[:name]
+  end
+end
