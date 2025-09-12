@@ -23,7 +23,7 @@ class PromotionService
 
   def fixed_discount_promo_price
     items = BasketItem.includes(:basket, :product).where(basket_id: basket.id, product_id: Product.find_by_product_code("SR1").id)
-    item_count = items.count.to_f
+    item_count = items.count
     return 0 if item_count == 0
     product = items.first.product
     product_discounted_price = 4.50.to_d
@@ -39,7 +39,7 @@ class PromotionService
 
   def percent_discount_promo_price
     items = BasketItem.includes(:basket, :product).where(basket_id: basket.id, product_id: Product.find_by_product_code("CF1").id)
-    item_count = items.count.to_f
+    item_count = items.count
     return 0 if item_count == 0
     product = items.first.product
 
