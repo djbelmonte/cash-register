@@ -1,0 +1,14 @@
+<ul>
+  <% basket.basket_items.includes(:product).each do |item| %>
+    <li>
+      <%= item.product.name %>
+      <%= number_to_currency(item.product.price, unit: "€") %>
+      <%= button_to "Remove",
+                    basket_basket_item_path(item),
+                    method: :delete,
+                    data: { turbo_confirm: "Remove this item?" } %>
+    </li>
+  <% end %>
+</ul>
+
+<h3>Total: <%= number_to_currency(basket_total, unit: "€") %></h3>
