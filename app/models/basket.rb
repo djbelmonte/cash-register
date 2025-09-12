@@ -3,6 +3,6 @@ class Basket < ApplicationRecord
   has_many :products, through: :basket_items
 
   def total_price
-    basket_items.includes(:product).sum { |item| item.product.price }
+    PromotionService.new(self).get_total_with_promo_applied
   end
 end
