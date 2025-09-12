@@ -12,7 +12,7 @@ class PromotionService
   private
 
   def buy_1_get_1_promo_price
-    items = BasketItem.includes(:basket, :product).where(basket_id: basket.id, product_id: Product.find_by_product_code("GR1").id)
+    items = basket.basket_items.joins(:product).where(products: { product_code: "GR1" })
     item_count = items.count
     return 0 if item_count == 0
     product = items.first.product
@@ -22,7 +22,7 @@ class PromotionService
   end
 
   def fixed_discount_promo_price
-    items = BasketItem.includes(:basket, :product).where(basket_id: basket.id, product_id: Product.find_by_product_code("SR1").id)
+    items = basket.basket_items.joins(:product).where(products: { product_code: "SR1" })
     item_count = items.count
     return 0 if item_count == 0
     product = items.first.product
@@ -38,7 +38,7 @@ class PromotionService
   end
 
   def percent_discount_promo_price
-    items = BasketItem.includes(:basket, :product).where(basket_id: basket.id, product_id: Product.find_by_product_code("CF1").id)
+    items = basket.basket_items.joins(:product).where(products: { product_code: "CF1" })
     item_count = items.count
     return 0 if item_count == 0
     product = items.first.product
