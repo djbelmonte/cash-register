@@ -4,7 +4,7 @@ class BasketItemsController < ApplicationController
   def create
     product = Product.find(params[:product_id])
     @basket.basket_items.create!(product: product)
-    redirect_to root_path
+    @basket_total = @basket.total_price
 
     respond_to do |format|
       format.turbo_stream
@@ -15,7 +15,7 @@ class BasketItemsController < ApplicationController
   def destroy
     item = @basket.basket_items.find(params[:id])
     item.destroy
-    redirect_to root_path
+    @basket_total = @basket.total_price
 
     respond_to do |format|
       format.turbo_stream

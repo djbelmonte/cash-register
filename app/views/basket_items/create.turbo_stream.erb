@@ -1,5 +1,3 @@
-<turbo-stream target="basket" action="replace">
-  <template>
-    <%= render "products/basket", basket: @basket, basket_total: @basket_total %>
-  </template>
-</turbo-stream>
+<%= turbo_stream.replace "basket" do %>
+  <%= render partial: "products/basket", locals: { basket: @basket, basket_total: @basket_total } %>
+<% end %>
